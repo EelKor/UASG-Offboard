@@ -8,7 +8,7 @@
    ```bash
    mkdir ~/catkin_ws/src
    cd catkin_ws/src
-   git clone
+   git clone https://github.com/EelKor/UASG-Offboard.git
    ```
 2. Build Catkin_ws
    ```bash
@@ -26,7 +26,7 @@
    source devel/setup.bash
    rosrun offb_py offb.py
    ```
-   offb_py is package name and offb.py is script name.
-   Name is depend on you!
+   **offb_py** is package name and **offb.py** is script name.
+   Name can be changed
    default name is same to example above
    
