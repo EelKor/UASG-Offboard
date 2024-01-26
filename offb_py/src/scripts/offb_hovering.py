@@ -1,16 +1,3 @@
-"""
-	<Developer> 
-	- Seung Shin Lee
-	  M.S. Course  
-	  UASG Group, Dept. of Aerospace Eng., Chungnam National Univ. 
-
-
-	<Release Note>
-	2024-01-09: 자동 Arming 및 호버링 기능 - SIL 검증완료
-	
-
-"""
-
 #!/usr/bin/env python
 
 import rospy
@@ -18,8 +5,6 @@ from geometry_msgs.msg import *
 from mavros_msgs.srv import CommandBool, CommandBoolRequest
 from mavros_msgs.srv import SetMode, SetModeRequest
 from mavros_msgs.msg import State
-
-
 
 def state_cb(msg):
 	global current_state
@@ -34,7 +19,6 @@ if __name__=="__main__":
 	- name은 구독할 토픽명, data_class는 해당 토픽의 데이터 타입
 	- callback 변수는 토픽이 발행되는 이벤트가 발생했을때 작동할 이벤트 리스너 함수를 콜백 함수의 형태로 요구
 	기본 argument는 구독한 메시지 객체 
-	
 	"""
 	rospy.Subscriber("mavros/state", State, state_cb)
 	
@@ -47,6 +31,7 @@ if __name__=="__main__":
 	- 큐 사이즈는 발행되는 메시지를 얼마나 가지고 있을지에 관련된 변수, 신규 데이터가 들어오는 경우
 	오래된 데이터부터 삭제하게 된다. 적합한 값을 선정하는것은 개발자의 몫
 	"""
+
 	local_pos_pub = rospy.Publisher('mavros/setpoint_position/local', PoseStamped, queue_size=10)
 	local_vel_pub = rospy.Publisher('mavros/setpoint_velocity/cmd_vel', Twist, queue_size=10)
 
@@ -69,6 +54,7 @@ if __name__=="__main__":
 	pose.pose.position.x = 0
 	pose.pose.position.y = 0
 	pose.pose.position.z = 2
+
 	# set velocity here
 	"""
 	vel = Twist()
@@ -76,6 +62,7 @@ if __name__=="__main__":
 	vel.linear.y = 20
 	vel.linear.z = 20
 	"""
+	
 	pos_loginfo_msg = "position = " + str(pose.pose.position.x) + " " + str(pose.pose.position.y)+" "+ str(pose.pose.position.z)
 	rospy.loginfo(pos_loginfo_msg)
 
